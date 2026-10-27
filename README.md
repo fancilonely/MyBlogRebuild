@@ -1,3 +1,10 @@
+# MyBlogRebuild
+FanciVoid 个人博客重构项目，基于 Shirone 进行二次开发。
+
+**Original Project:** [Shirone](https://github.com/LyraVoid/Shirone)
+
+**Upstream Repository:** [https://github.com/LyraVoid/Shirone](https://github.com/LyraVoid/Shirone)
+
 <div align="center">
 
 <img src="./public/logo/icon.webp" width="88" height="88" alt="Shirone logo" />
