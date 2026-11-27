@@ -11,7 +11,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { getCategoryList } from "@utils/content-utils";
-import { pathsEqual, url } from "@utils/url-utils";
+import { getCategoryUrl, pathsEqual, url } from "@utils/url-utils";
 
 interface Props {
 	/** 文章页所属分类名：非首页/归档时对该分类做弱高亮 */
@@ -35,6 +35,15 @@ const postCategory = (currentPostCategory || "").trim();
 // - 其它（关于等）→ 无高亮。
 // query 分类（?category=）在静态站点构建期不可知，由客户端校正。
 const softCategory = !isHome && !isArchive && postCategory ? postCategory : "";
+const momentsUrl = url("/moments/");
+// 页中栏固定顺序的分类胶囊（名称即新版分类名；计数取自 getCategoryList）
+const ORDERED_CATEGORIES = ["技术笔记", "言の轨迹", "像素空白", "如林深远", "时间胶囊", "寄往真情"];
+const countByName = new Map(categories.map((c) => [c.name, c.count]));
+const orderedCategories = ORDERED_CATEGORIES.map((name) => ({
+	name,
+	url: getCategoryUrl(name),
+	count: countByName.get(name) ?? 0,
+}));
 ---
 
 <!-- nav landmark：分类栏静态渲染在 Swup 容器外，需要独立 landmark 才能通过
@@ -61,12 +70,11 @@ const softCategory = !isHome && !isArchive && postCategory ? postCategory : "";
 				selected={isArchive}
 				class="shrink-0"
 			>
-				{i18n(I18nKey.archive)}
+				归档
 			</Chip>
 
-			<!-- 分类区：横向滚动 -->
 			<div class="category-bar-list flex gap-2 overflow-x-auto hide-scrollbar flex-1 min-w-0">
-				{categories.map((cat) => (
+				{orderedCategories.map((cat) => (
 					<Chip
 						variant="tonal"
 						href={cat.url}
@@ -78,6 +86,9 @@ const softCategory = !isHome && !isArchive && postCategory ? postCategory : "";
 						<span class="category-bar__count" aria-hidden="true">{cat.count}</span>
 					</Chip>
 				))}
+				<Chip variant="tonal" href={momentsUrl} selected={false} class="shrink-0">
+					谈天说地
+				</Chip>
 			</div>
 		</div>
 	</Card>

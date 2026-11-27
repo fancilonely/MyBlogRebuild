@@ -14,6 +14,8 @@ export interface ArchiveItem {
 	href: string;
 	/** 展示日期（如 "08-13"） */
 	date: string;
+	/** 未知日期：改用流动马赛克 */
+	unknown?: boolean;
 	category?: string;
 	tags?: string[];
 }
@@ -22,6 +24,8 @@ export interface ArchiveGroup {
 	id: string;
 	/** 头部主文本：年份数字 / 分类名 / #标签名 */
 	title: string;
+	/** 未知年份组：标题用流动马赛克 */
+	unknown?: boolean;
 	items: ArchiveItem[];
 }
 
@@ -92,7 +96,13 @@ function toggleGroup(id: string) {
 				aria-expanded={!collapsed[g.id]}
 				onclick={() => toggleGroup(g.id)}
 			>
-				<span class="m3-blog-archive__group-title">{g.title}</span>
+				<span class="m3-blog-archive__group-title">
+					{#if g.unknown}
+						<span class="unknown-date-mosaic" title="创作时间未知" aria-label="创作时间未知"></span>
+					{:else}
+						{g.title}
+					{/if}
+				</span>
 				<span class="m3-blog-archive__dot" aria-hidden="true"></span>
 				<span class="m3-blog-archive__count">{countLabel(g.items.length)}</span>
 				<span
@@ -115,7 +125,13 @@ function toggleGroup(id: string) {
 					{#each g.items as it (it.href)}
 						<li>
 							<a class="m3-blog-archive__item" href={it.href} aria-label={it.title}>
-								<span class="m3-blog-archive__date">{it.date}</span>
+								<span class="m3-blog-archive__date">
+									{#if it.unknown}
+										<span class="unknown-date-mosaic" title="创作时间未知" aria-label="创作时间未知"></span>
+									{:else}
+										{it.date}
+									{/if}
+								</span>
 								<span class="m3-blog-archive__node" aria-hidden="true"></span>
 								<span class="m3-blog-archive__title">
 									{#if it.category}

@@ -11,6 +11,7 @@ interface Props {
 }
 
 const { href, title, published, category, lane } = Astro.props;
+const unknown = !published || String(published).startsWith("1970");
 const accent = lane === "related" ? "var(--primary)" : "var(--tertiary)";
 ---
 
@@ -20,7 +21,11 @@ const accent = lane === "related" ? "var(--primary)" : "var(--tertiary)";
 		<span class="article-discovery-item__content">
 			<span class="article-discovery-item__title">{title}</span>
 			<span class="article-discovery-item__meta">
-				<time datetime={published}>{published}</time>
+				{unknown ? (
+					<span class="unknown-date-mosaic" title="创作时间未知" aria-label="创作时间未知"></span>
+				) : (
+					<time datetime={published}>{published}</time>
+				)}
 				{category && <span>{category}</span>}
 			</span>
 		</span>

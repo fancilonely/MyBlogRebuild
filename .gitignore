@@ -77,3 +77,31 @@ artifacts/lighthouse/*
 
 # generated AI skills plugin packages
 artifacts/shirone-ai-*
+
+# ---------------------------------------------------------------------------
+# FanciVoid: migration workspace safety net
+# ---------------------------------------------------------------------------
+# Raw exports and intermediate data from the old WordPress site. These live in
+# the workspace root, outside this repository; the entries below are a guard so
+# that copying one in by accident can never reach a commit.
+private-backups/
+migration-input/
+migration_staging/
+tieba/
+
+# databases and archives exported from the old site
+*.sql
+*.sql.gz
+*.zip
+*.tar.gz
+
+# migration reports, handoff notes and validation output
+MIGRATION_AUDIT.md
+REBUILD_SUMMARY.md
+THEME_CLEANUP_REPORT.md
+BROKEN_ASSETS.md
+HANDOFF_PROMPT.md
+validation.json
+
+# transient generator output that must not be committed
+src/generated/*.tmp

@@ -18,6 +18,8 @@ interface Props {
 	class?: string;
 	/** 发布日期（展示文本，如 "2026-08-13"） */
 	published?: string;
+	/** 未知日期：用流动马赛克替代文本，不显示 1970 */
+	publishedUnknown?: boolean;
 	/** 更新日期（与 published 不同才渲染） */
 	updated?: string;
 	category?: BlogMetaLink | null;
@@ -37,6 +39,7 @@ interface Props {
 const {
 	class: className,
 	published,
+	publishedUnknown = false,
 	updated,
 	category,
 	tags = [],
@@ -52,7 +55,11 @@ const {
 	{published && (
 		<span class="m3-blog-postmeta__item">
 			<MetaIcon icon="material-symbols:calendar-today-outline-rounded" />
-			<span class="m3-blog-postmeta__text">{published}</span>
+			{publishedUnknown ? (
+				<span class="unknown-date-mosaic" title="创作时间未知" aria-label="创作时间未知"></span>
+			) : (
+				<span class="m3-blog-postmeta__text">{published}</span>
+			)}
 		</span>
 	)}
 

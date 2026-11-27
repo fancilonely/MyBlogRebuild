@@ -8,6 +8,8 @@ const postsCollection = defineCollection({
 		title: z.string(),
 		published: z.date(),
 		publishedAt: z.date().optional(),
+		/** 迁移保留的第二个发布日期字段（旧站 published / pubDate 双日期），可选 */
+		pubDate: z.date().optional(),
 		updated: z.date().optional(),
 		updatedAt: z.date().optional(),
 		pinned: z.boolean().optional().default(false),
@@ -47,6 +49,19 @@ const postsCollection = defineCollection({
 		prevSlug: z.string().default(""),
 		nextTitle: z.string().default(""),
 		nextSlug: z.string().default(""),
+
+		/* 迁移溯源字段（来自 WordPress / 贴吧整理，仅留存审计，不参与渲染） */
+		category_label: z.string().optional(),
+		source: z.string().optional(),
+		date_status: z.string().optional(),
+		original_dates: z.array(z.any()).optional(),
+		provenance: z.array(z.any()).optional(),
+		original_types: z.array(z.string()).optional(),
+		review_flags: z.array(z.string()).optional(),
+		/** 友人作品署名（原注明的作者名，非本站作者本人） */
+		author: z.string().optional(),
+		/** 日期为未知占位（前端渲染流动马赛克，不显示 1970） */
+		isUnknownDate: z.boolean().optional(),
 	}),
 });
 

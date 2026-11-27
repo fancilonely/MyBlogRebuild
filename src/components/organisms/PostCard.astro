@@ -119,6 +119,7 @@ const categoryLink = category
 	? { name: category, href: getCategoryUrl(category) }
 	: null;
 const tagLinks = tags.map((t) => ({ name: t.trim(), href: getTagUrl(t) }));
+const publishedUnknown = published.getUTCFullYear() === 1970;
 
 const isEncrypted = isEncryptedPost(entry.data);
 const words = remarkPluginFrontmatter.words ?? 0;
@@ -145,6 +146,7 @@ const excerpt =
 	imageWidth={coverWidth}
 	imageHeight={coverHeight}
 	published={formatDateToYYYYMMDD(published)}
+	publishedUnknown={publishedUnknown}
 	updated={updated ? formatDateToYYYYMMDD(updated) : undefined}
 	pinned={pinned}
 	encrypted={isEncrypted}

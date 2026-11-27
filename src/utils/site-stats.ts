@@ -5,6 +5,7 @@
  */
 import { render } from "astro:content";
 import { seriesConfig } from "../config/seriesConfig.ts";
+import { siteConfig } from "../config/siteConfig.ts";
 import {
 	getCategoryList,
 	getSeriesCatalog,
@@ -29,6 +30,14 @@ export interface SiteStats {
 }
 
 const DAY_MS = 86_400_000;
+
+/** 运行天数：优先以 siteConfig.siteStartDate（按 +08:00 解释）为起点，否则回退最早文章日。 */
+function computeRunDays(earliest: number): number {
+	const startDate = siteConfig.siteStartDate?.trim();
+	const startMs = startDate ? Date.parse(`${startDate}T00:00:00+08:00`) : earliest;
+	if (!Number.isFinite(startMs)) return 0;
+	return Math.max(0, Math.floor((Date.now() - startMs) / DAY_MS));
+}
 
 let cache: SiteStats | null = null;
 
@@ -67,9 +76,7 @@ export async function getSiteStats(): Promise<SiteStats> {
 		/** 系列实体数（功能关闭时为 0，SiteStats 不产出该行） */
 		series: seriesCatalog?.size ?? 0,
 		words,
-		days: Number.isFinite(earliest)
-			? Math.max(0, Math.floor((Date.now() - earliest) / DAY_MS))
-			: 0,
+		days: computeRunDays(earliest),
 		lastActivity:
 			latestActivity > 0 ? new Date(latestActivity).toISOString() : null,
 	};

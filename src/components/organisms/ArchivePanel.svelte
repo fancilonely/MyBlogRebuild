@@ -117,10 +117,12 @@ function formatDate(date: Date) {
 }
 
 function toItem(post: Post): ArchiveItem {
+	const unknown = post.data.published.getUTCFullYear() === 1970;
 	return {
 		title: post.data.title,
 		href: post.url ?? getPostUrlBySlug(post.slug),
-		date: formatDate(post.data.published),
+		date: unknown ? "" : formatDate(post.data.published),
+		unknown,
 		category: post.data.category ?? undefined,
 		tags: post.data.tags,
 	};
@@ -149,16 +151,21 @@ const groups = $derived.by((): ArchiveGroup[] => {
 		}
 	} else {
 		for (const p of filtered) {
-			add(formatCalendarDate(p.data.published).slice(0, 4), toItem(p));
+			const year = formatCalendarDate(p.data.published).slice(0, 4);
+			add(year === "1970" ? "____unknown____" : year, toItem(p));
 		}
 	}
 	const list = [...buckets.entries()].map(([id, items]) => ({
 		id,
-		title: id,
+		title: id === "____unknown____" ? "" : id,
+		unknown: id === "____unknown____",
 		items,
 	}));
 	if (groupBy === "year") {
-		return list.sort((a, b) => Number(b.title) - Number(a.title));
+		return list.sort((a, b) => {
+			if (a.unknown !== b.unknown) return a.unknown ? 1 : -1;
+			return Number(b.title) - Number(a.title);
+		});
 	}
 	return list.sort((a, b) =>
 		a.title.toLowerCase().localeCompare(b.title.toLowerCase()),

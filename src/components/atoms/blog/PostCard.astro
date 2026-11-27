@@ -26,6 +26,8 @@ interface Props {
 	imageHeight?: number;
 	imageAlt?: string;
 	published?: string;
+	/** 未知日期：用流动马赛克替代文本 */
+	publishedUnknown?: boolean;
 	updated?: string;
 	pinned?: boolean;
 	encrypted?: boolean;
@@ -49,6 +51,7 @@ const {
 	imageHeight,
 	imageAlt = "",
 	published,
+	publishedUnknown = false,
 	updated,
 	pinned = false,
 	encrypted = false,
@@ -111,6 +114,7 @@ const titleLabel =
 			<PostMeta
 				class="m3-blog-postcard__meta"
 				{published}
+				{publishedUnknown}
 				{updated}
 				category={category}
 				tags={tags}

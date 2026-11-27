@@ -1,0 +1,32 @@
+/* 未知创作时间：流动马赛克像素闪烁胶囊（替代 1970 显示） */
+.unknown-date-mosaic{
+  display:inline-block;
+  width:4.75rem;height:1rem;border-radius:9999px;
+  vertical-align:middle;
+  background-image:linear-gradient(90deg,
+    color-mix(in oklab,var(--primary) 75%,transparent) 0 11%,
+    color-mix(in oklab,var(--tertiary) 75%,transparent) 11% 22%,
+    color-mix(in oklab,var(--secondary) 75%,transparent) 22% 33%,
+    color-mix(in oklab,var(--primary) 35%,transparent) 33% 44%,
+    color-mix(in oklab,var(--tertiary) 60%,transparent) 44% 55%,
+    color-mix(in oklab,var(--secondary) 45%,transparent) 55% 66%,
+    color-mix(in oklab,var(--primary) 65%,transparent) 66% 77%,
+    color-mix(in oklab,var(--tertiary) 40%,transparent) 77% 88%,
+    color-mix(in oklab,var(--secondary) 60%,transparent) 88% 100%);
+  background-size:200% 100%;
+  box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--outline-variant) 70%,transparent);
+  animation:mosaic-flow 2.6s linear infinite, mosaic-flicker 1.1s steps(2,end) infinite;
+  position:relative;overflow:hidden;
+}
+.unknown-date-mosaic::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0 5px,color-mix(in oklab,var(--surface) 55%,transparent) 5px 6px),
+    repeating-linear-gradient(0deg,transparent 0 5px,color-mix(in oklab,var(--surface) 55%,transparent) 5px 6px);
+  opacity:.5;mix-blend-mode:overlay;
+}
+@keyframes mosaic-flow{0%{background-position:0% 0}100%{background-position:-200% 0}}
+@keyframes mosaic-flicker{0%{filter:brightness(1)}50%{filter:brightness(1.18)}100%{filter:brightness(1)}}
+.m3-blog-archive__date .unknown-date-mosaic{width:3.75rem;height:.9rem}
+.m3-blog-archive__group-title .unknown-date-mosaic{width:5.5rem;height:1.35rem}
+@media (prefers-reduced-motion: reduce){.unknown-date-mosaic{animation:none}}

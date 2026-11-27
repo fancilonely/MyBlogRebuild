@@ -139,28 +139,24 @@ export const LinkPresets: Record<string, NavBarLink> = {
 
 const defaultNavBarConfig: NavBarConfig = {
 	links: [
-		LinkPresets.Home,
-		LinkPresets.Archive,
-		LinkPresets.Friends,
-		LinkPresets.Moments,
-		LinkPresets.Anime,
-		LinkPresets.Compass,
-		LinkPresets.Albums,
+		{ name: "首页", url: "/", icon: "material-symbols:home-outline-rounded", pageKey: "home" },
+		{ name: "归档", url: "/archive/", icon: "material-symbols:archive-outline-rounded", pageKey: "archive" },
+		{ name: "友链", url: "/friends/", icon: "material-symbols:handshake-outline-rounded", pageKey: "friends" },
+		{ name: "谈天说地", url: "/moments/", icon: "material-symbols:auto-awesome-outline-rounded", pageKey: "moments" },
+		{ name: "番剧", url: "/anime/", icon: "material-symbols:live-tv-outline-rounded", pageKey: "anime" },
+		{ name: "罗盘", url: "/compass/", icon: "material-symbols:explore-rounded", pageKey: "compass" },
+		{ name: "相册", url: "/albums/", icon: "material-symbols:photo-library-outline-rounded", pageKey: "albums" },
 		{
-			name: i18n(I18nKey.more),
+			name: "更多",
 			icon: "material-symbols:apps-rounded",
 			children: [
-				LinkPresets.Timeline,
-				LinkPresets.Projects,
-				LinkPresets.Devices,
-				LinkPresets.Games,
-				LinkPresets.Skills,
-				// 分类/标签入口不进导航菜单（避免菜单项过多），预设已登记指向独立页面，
-				// 需要时取消注释即可
-				// LinkPresets.Categories,
-				// LinkPresets.Tags,
-				LinkPresets.About,
-				LinkPresets.GitHub,
+				{ name: "时间线", url: "/timeline/", icon: "material-symbols:timeline-rounded", pageKey: "timeline" },
+				{ name: "项目", url: "/projects/", icon: "material-symbols:deployed-code-outline-rounded", pageKey: "projects" },
+				{ name: "我的设备", url: "/devices/", icon: "material-symbols:devices-rounded", pageKey: "devices" },
+				{ name: "游戏", url: "/games/", icon: "material-symbols:sports-esports-outline-rounded", pageKey: "games" },
+				{ name: "技能", url: "/skills/", icon: "material-symbols:workspaces-outline-rounded", pageKey: "skills" },
+				{ name: "关于", url: "/about/", icon: "material-symbols:info-outline-rounded", pageKey: "about" },
+				{ name: "GitHub", url: "https://github.com/fancilonely", icon: "fa7-brands:github", external: true },
 			],
 		},
 	],

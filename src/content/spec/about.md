@@ -1,26 +1,28 @@
-# About Shirone
+# 关于 FanciVoid
 
-Welcome to the demo site of **Shirone** (白音) — an expressive, anime-inspired blog theme built on the **Material 3 Expressive (M3E)** design system.
+欢迎来到 **FanciVoid** —— 一个以文字创作与观点表达为核心、以兴趣收藏和日常随记为延伸的个人数字空间。
 
-::github{repo="LyraVoid/Shirone"}
+::github{repo="fancilonely/MyBlogRebuild"}
 
-## ✦ Design & Philosophy
+## ✦ 这里有什么
 
-Shirone aims to combine the warmth of expressive anime aesthetics with the rigor of modern web engineering:
+- **诗歌**：分行写作、组诗与那些没写成长文的句子。
+- **评论**：动画、视觉小说、游戏与书的观后感、读后感和体验记录。
+- **散文**：随笔、回忆与自述性的文字。
+- **时间胶囊**：阶段回顾、年度总结与写给未来的记录。
+- **世界观企划**：设定集、同人企划与创作理论的整理。
+- **技术笔记**：编程、计算机课程与项目复盘的笔记。
 
-- **Dynamic Chromatic Spell**: Full dynamic HCT palette generation responding seamlessly to light/dark modes and user preferences with zero layout shifts.
-- **Seamless Shell Navigation**: Persistent application shell driven by Swup for continuous music playback, smooth page transitions, and preserved state.
-- **Rich Story Grimoire**: Markdown and MDX authoring with KaTeX math, Mermaid diagrams, interactive admonitions, expressive code blocks, and adaptive image galleries.
-- **Zero Extra Burden**: Optional integrations (comments, analytics, music widgets) load dynamically on demand — zero DOM footprint and zero bundle overhead when disabled.
+以及分散在说说（Moments）里的零碎日常、随手截图与正在进行的实验。
 
-## ✦ Tech Stack
+## ✦ 站点说明
 
-- **Framework**: [Astro 7](https://astro.build/) & [Svelte 5](https://svelte.dev/) (Runes-driven islands)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) & [Stylus](https://stylus-lang.com/)
-- **Design Standard**: [Material 3 Expressive](https://m3.material.io/)
-- **Typography**: Outfit & Yozai (悠哉圆体) with automated build-time subsetting
-- **Search Engine**: [Pagefind](https://pagefind.app/) offline full-text search
+- 本站由 [Astro](https://astro.build/) 静态构建，基于开源主题 [Shirone](https://github.com/LyraVoid/Shirone) 二次开发，遵循 **Material 3 Expressive** 设计语言。
+- 历史内容由旧 WordPress 博客迁移而来，旧链接通过 301 重定向保留可访问性；尚未完成审阅的草稿不会公开。
+- 本站不提供评论、登录或在线后台，内容通过 Markdown + Git 构建发布。
 
-## ✦ Credits
+## ✦ 联系与出处
 
-- **Font**: [Yozai Font (悠哉字体)](https://github.com/lxgw/yozai-font) by [lxgw](https://github.com/lxgw)
+如需交流，可通过站点页脚与友链页面找到入口。所有原创文字版权归作者所有。
+
+本站中文字形使用 [Yozai（悠哉字体）](https://github.com/lxgw/yozai-font)（作者 [lxgw](https://github.com/lxgw)），感谢原作者的字体工作。
