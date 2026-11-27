@@ -6,21 +6,21 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  * 类型见 src/types/config.ts。
  */
 export const profileConfig: ProfileConfig = withUserConfig("profile", {
-	avatar: "assets/images/demo-avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "FanciVoid",
-	bio: "以文字创作与观点表达为核心，收藏兴趣与日常随记为延伸的个人数字空间。",
+	avatar: "assets/images/Fancyprofile.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	name: "FancyTowa",
+	bio: "已然遥远的空白理想之城",
 	links: [
 		{
 			name: "X",
 			icon: "fa7-brands:x-twitter", // Visit https://icones.js.org/ for icon codes
 			// You will need to install the corresponding icon set if it's not already included
 			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://x.com",
+			url: "https://x.com/fancivoid",
 		},
 		{
 			name: "Steam",
 			icon: "fa7-brands:steam",
-			url: "https://store.steampowered.com",
+			url: "https://steamcommunity.com/id/Fancilonely/",
 		},
 		{
 			name: "GitHub",

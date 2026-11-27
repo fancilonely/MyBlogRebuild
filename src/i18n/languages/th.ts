@@ -52,6 +52,7 @@ export const th: Translation = {
 	[Key.skills]: "ทักษะ",
 	[Key.skillsBanner]: "เทคโนโลยีและเครื่องมือที่ใช้เปลี่ยนแนวคิดให้เป็นผลิตภัณฑ์ที่ดูแลรักษาได้",
 	[Key.skillsCounts]: "ทักษะ",
+	[Key.skillsNoResults]: "ไม่พบทักษะที่ตรงกัน",
 	[Key.skillCategories]: "หมวดหมู่ทักษะ",
 	[Key.skillLevel]: "ระดับความชำนาญ",
 	[Key.skillLevelBeginner]: "เริ่มต้น",

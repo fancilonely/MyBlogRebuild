@@ -56,6 +56,7 @@ export const tr: Translation = {
 	[Key.skillsBanner]:
 		"Fikirleri sürdürülebilir ürünlere dönüştürmek için kullandığım teknolojiler ve araçlar.",
 	[Key.skillsCounts]: "beceri",
+	[Key.skillsNoResults]: "Eşleşen yetenek yok",
 	[Key.skillCategories]: "Beceri kategorileri",
 	[Key.skillLevel]: "Yetkinlik",
 	[Key.skillLevelBeginner]: "Başlangıç",

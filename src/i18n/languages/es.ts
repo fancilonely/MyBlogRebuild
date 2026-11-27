@@ -56,6 +56,7 @@ export const es: Translation = {
 	[Key.skillsBanner]:
 		"Tecnologías y herramientas para convertir ideas en productos mantenibles.",
 	[Key.skillsCounts]: "habilidades",
+	[Key.skillsNoResults]: "No hay habilidades que coincidan",
 	[Key.skillCategories]: "Categorías de habilidades",
 	[Key.skillLevel]: "Dominio",
 	[Key.skillLevelBeginner]: "Principiante",

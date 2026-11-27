@@ -9,7 +9,7 @@ const sortedPostsList = await getSortedPostsList();
 const archiveSummary = `${sortedPostsList.length} ${i18n(I18nKey.postsCount)}`;
 ---
 
-<MainGridLayout title={i18n(I18nKey.archive)} description={archiveSummary} page="archive">
+<MainGridLayout title={i18n(I18nKey.archive)} description={archiveSummary} hideBannerSubtitle page="archive">
     <ArchivePanel sortedPosts={sortedPostsList} client:visible></ArchivePanel>
 </MainGridLayout>
 

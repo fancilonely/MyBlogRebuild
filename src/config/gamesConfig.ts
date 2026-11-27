@@ -13,7 +13,9 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  * 注：游戏的具体清单数据（游戏名、开发商、封面、评分、时长、简评等）请在 `src/data/games.ts` 中维护。
  */
 export const gamesConfig: GamesConfig = withUserConfig("games", {
-	enable: true,
+	// 停用：/games/ 路由重定向到 404，顶栏「更多」中的入口由 navBarConfig 自动裁剪。
+	// 数据与配置均保留，后续想启用只需改回 true。
+	enable: false,
 	title: "$t:games",
 	description: "$t:gamesBanner",
 	categories: [

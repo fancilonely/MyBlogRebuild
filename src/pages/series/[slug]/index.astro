@@ -63,7 +63,7 @@ const statusLabel =
 const subtitle = `${statusLabel} · ${ordered.length} ${i18n(I18nKey.postsCount)}`;
 ---
 
-<MainGridLayout title={series.data.title} description={subtitle} page="series">
+<MainGridLayout title={series.data.title} description={subtitle} hideBannerSubtitle page="series">
 	{markdownStylesheetAssets.map(({ pack, css }) => (
 		<style is:inline slot="head" data-swup-optional={pack} set:html={css}></style>
 	))}
@@ -71,7 +71,6 @@ const subtitle = `${statusLabel} · ${ordered.length} ${i18n(I18nKey.postsCount)
 		<PageHeader
 			icon="material-symbols:auto-stories-rounded"
 			title={series.data.title}
-			subtitle={subtitle}
 		/>
 		{series.body && (
 			<section class="series-detail__overview">

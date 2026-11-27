@@ -397,3 +397,17 @@ const setup = () => {
 if (window.swup) setup();
 else document.addEventListener("swup:enable", setup);
 </script>
+
+<script>
+import {
+	bindExternalLinkBuffer,
+	initRedirectBufferPage,
+} from "../utils/external-link-buffer";
+
+// 全站外链跳转缓冲（替代老站 redirect.php）：
+// 捕获阶段绑定一次即可覆盖 Swup 换页后的所有新内容。
+bindExternalLinkBuffer();
+// /go/ 缓冲页自身逻辑：首屏直接初始化，Swup 站内跳转后由 page:view 重新初始化。
+initRedirectBufferPage();
+document.addEventListener("swup:page:view", initRedirectBufferPage);
+</script>

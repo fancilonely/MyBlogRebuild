@@ -11,6 +11,7 @@
 import ProgressIndicator from "@components/atoms/feedback/ProgressIndicator.svelte";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import { onMount } from "svelte";
 import { ANIME_STATUS_META } from "@utils/anime/status";
 import { reveal } from "@utils/motion";
 import { url } from "@utils/url-utils";
@@ -21,6 +22,34 @@ let {
 	/** stagger 入场延迟 ms（由列表传入：第 i 项 i × step） */
 	delay = 0,
 }: { anime: AnimeItem; delay?: number } = $props();
+
+/**
+ * 统一兜底封面：外链封面（lain.bgm.tv 等）在部分网络下会加载失败，
+ * 失败时统一切到站内这张图，避免出现破图 / 空白版式。
+ * 源图 850×1200（2:3），与卡片 2:3 封面比例一致，不需要额外裁切。
+ */
+const DEFAULT_COVER = "/assets/anime/ZZC.webp";
+let coverEl = $state<HTMLImageElement>();
+
+/** 兜底切换（幂等：已切过则直接返回，防止 onerror 死循环） */
+function applyDefaultCover(img: HTMLImageElement | null | undefined) {
+	if (!img || img.dataset.coverFallback === "true") return;
+	img.dataset.coverFallback = "true";
+	img.onerror = null;
+	img.src = DEFAULT_COVER;
+}
+
+function handleCoverError(event: Event) {
+	applyDefaultCover(event.currentTarget as HTMLImageElement | null);
+}
+
+// 图片可能在 hydration 之前就已加载失败（client:visible 延迟挂载），
+// 此时 error 事件已经错过，需要在挂载后再补一次检查。
+onMount(() => {
+	if (coverEl && coverEl.complete && coverEl.naturalWidth === 0) {
+		applyDefaultCover(coverEl);
+	}
+});
 
 const statusMeta = $derived(ANIME_STATUS_META[anime.status]);
 const isWatching = $derived(
@@ -46,11 +75,13 @@ const metaLine = $derived(
 	{#snippet coverContent()}
 		{#if anime.cover}
 			<img
+				bind:this={coverEl}
 				class="anime-card__cover-img"
 				src={url(anime.cover)}
 				alt={anime.title}
 				loading="lazy"
 				referrerpolicy="no-referrer"
+				onerror={handleCoverError}
 			/>
 		{:else}
 			<span class="anime-card__placeholder" aria-hidden="true">

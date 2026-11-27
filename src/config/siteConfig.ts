@@ -12,7 +12,7 @@ import { withUserConfig } from "../utils/config-overlay.ts";
 export const siteConfig: SiteConfig = withUserConfig("site", {
 	site: "https://www.fancivoid.asia/",
 	base: "/",
-	title: "FanciVoid",
+	title: "空想永远~fancytowa's world – fantasyforever",
 	subtitle: "以文字创作与观点表达为核心的个人数字空间",
 	// 电脑端顶栏标题与导航内容区域："left" 左对齐，"center" 居中。
 	topAppBar: {
@@ -59,8 +59,8 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		// desktop 用于 >= 1024px；mobile 仅用于 < 1024px 的首页，手机非首页不显示壁纸。
 		// 数组顺序就是轮播顺序；只需要静态 Banner 时，每组保留一张图片即可。
 		src: {
-			desktop: ["assets/images/banner/desktop/1.webp"],
-			mobile: ["assets/images/banner/mobile/1.webp"],
+			desktop: ["assets/images/banner/desktop/bochiTheRockbyhaturuzzz.webp"],
+			mobile: ["assets/images/banner/mobile/hzm.webp"],
 		},
 		// 图片裁切焦点："top"、"center" 或 "bottom"。
 		position: "center",
@@ -72,14 +72,9 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		homeText: {
 			// 仅在首页 Banner 中显示，标题与副标题会上下居中排列。
 			enable: true,
-			title: "FanciVoid",
-			subtitle: [
-				"特別なことはないけど、君がいると十分です",
-				"今でもあなたは私の光",
-				"君ってさ、知らないうちに私の毎日になってたよ",
-				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
-				"今日はなんでもない日。でも、ちょっとだけいい日",
-			],
+			title: "FancyTowa",
+			// 首页签名（打字机逐字显示）：多条即按顺序轮播。
+			subtitle: ["運命の果実を、一緒に食べよう。"],
 			typewriter: {
 				// 副标题逐字显示；关闭后直接显示完整副标题。
 				enable: true,
@@ -123,7 +118,18 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	},
 	favicon: [
 		// 浏览器标签页图标，路径相对于 public 目录。
-		{ src: "/logo/icon.webp" },
+		// 源 logo：public/logo/logo128.webp（128×128 方形，黑心形）。
+		// 其余尺寸取自 src/assets/images/icon/ 的同款多尺寸导出（复制到 public/favicon/）——
+		// 32/48/96/180/192/512 均为正方形，无需居中裁剪；若日后换图尺寸不一致，
+		// 用 sharp `resize(size, size, { fit: "cover", position: "center" })` 居中裁剪即可。
+		{ src: "/favicon/logo.ico", sizes: "any" },
+		{ src: "/favicon/logo-32.png", sizes: "32x32" },
+		{ src: "/favicon/logo-48.png", sizes: "48x48" },
+		{ src: "/favicon/logo-96.png", sizes: "96x96" },
+		{ src: "/logo/logo128.webp", sizes: "128x128" },
+		{ src: "/favicon/logo-180.png", sizes: "180x180" },
+		{ src: "/favicon/logo-192.png", sizes: "192x192" },
+		{ src: "/favicon/logo-512.png", sizes: "512x512" },
 	],
 });
 

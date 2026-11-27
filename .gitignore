@@ -79,7 +79,7 @@ artifacts/lighthouse/*
 artifacts/shirone-ai-*
 
 # ---------------------------------------------------------------------------
-# FanciVoid: migration workspace safety net
+# FancyTowa: migration workspace safety net
 # ---------------------------------------------------------------------------
 # Raw exports and intermediate data from the old WordPress site. These live in
 # the workspace root, outside this repository; the entries below are a guard so
@@ -105,3 +105,22 @@ validation.json
 
 # transient generator output that must not be committed
 src/generated/*.tmp
+
+# ---------------------------------------------------------------------------
+# 代码与个人内容分离（Code / Content separation）
+# ---------------------------------------------------------------------------
+# 个人文章、说说、文章配图与备份只保留在本地，绝不进入版本库；
+# 仅放行一份最小可运行示例，保证 clone 后 `pnpm dev` / `pnpm build` 直接可用。
+# 说明：`private-backups/` 与 `BROKEN_ASSETS.md` 已在上面的安全网段落中忽略。
+src/content/posts/*
+!src/content/posts/hello-world.md
+src/content/moments/*
+!src/content/moments/.gitkeep
+src/content/spec/*
+!src/content/spec/about.md
+public/images/*
+!public/images/.gitkeep
+
+# 个人头像：只留在本地，公开仓库保留主题默认占位图
+# （头像路径在 src/config/profileConfig.ts 的 avatar 字段，换成你自己的图片即可）
+src/assets/images/Fancyprofile.webp

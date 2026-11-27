@@ -21,12 +21,11 @@ const totalPosts = categories.reduce(
 const categorySummary = `${categories.length} ${i18n(I18nKey.categoriesCount)} · ${totalPosts} ${i18n(I18nKey.postsCount)}`;
 ---
 
-<MainGridLayout title={i18n(I18nKey.categories)} description={categorySummary} page="categories">
+<MainGridLayout title={i18n(I18nKey.categories)} description={categorySummary} hideBannerSubtitle page="categories">
 	<Card color="var(--card-bg)" radius="l" class="category-index px-8 py-6">
 		<PageHeader
 			icon="material-symbols:folder-outline-rounded"
 			title={i18n(I18nKey.categories)}
-				subtitle={categorySummary}
 		/>
 		{categories.length > 0 && (
 			<ul class="category-index__list">

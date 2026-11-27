@@ -57,6 +57,7 @@ export const ja: Translation = {
 	[Key.skillsBanner]:
 		"アイデアを保守しやすいプロダクトにするための技術とツール。",
 	[Key.skillsCounts]: "個のスキル",
+	[Key.skillsNoResults]: "該当するスキルはありません",
 	[Key.skillCategories]: "スキルカテゴリ",
 	[Key.skillLevel]: "習熟度",
 	[Key.skillLevelBeginner]: "初級",

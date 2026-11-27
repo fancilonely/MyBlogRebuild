@@ -57,6 +57,7 @@ export const en: Translation = {
 	[Key.skillsBanner]:
 		"Technologies and tools I use to turn ideas into maintainable products.",
 	[Key.skillsCounts]: "skills",
+	[Key.skillsNoResults]: "No matching skills",
 	[Key.skillCategories]: "Skill categories",
 	[Key.skillLevel]: "Proficiency",
 	[Key.skillLevelBeginner]: "Beginner",

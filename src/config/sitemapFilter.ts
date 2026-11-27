@@ -34,6 +34,9 @@ export function getDisabledPages(): string[] {
  * 排除被关闭页面（例如 /skills/, /skills/index.html 等）以及 404 跳转存根。
  */
 export function isSitemapPageAllowed(pageUrl: string): boolean {
+	// 外链跳转缓冲页（/go/）是工具页，不应被搜索引擎收录
+	if (pageUrl.endsWith("/go/") || pageUrl.endsWith("/go")) return false;
+
 	const disabled = getDisabledPages();
 	for (const p of disabled) {
 		if (

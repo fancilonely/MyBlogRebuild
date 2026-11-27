@@ -26,6 +26,12 @@ interface Props {
 	banner?: string;
 	ogImage?: string;
 	description?: string;
+	/**
+	 * 是否在 Banner 中隐藏副标题。
+	 * `description` 仍会写入 `<meta name="description">` 与 OG 标签（SEO 不受影响），
+	 * 仅不再作为 Banner 的副标题渲染——文章页、说说页与归档系列页使用。
+	 */
+	hideBannerSubtitle?: boolean;
 	/** Banner 可选日期，使用 YYYY-MM-DD 等可直接写入 time[datetime] 的值。 */
 	bannerDate?: string;
 	lang?: string;
@@ -45,6 +51,7 @@ const {
 	banner,
 	ogImage,
 	description,
+	hideBannerSubtitle = false,
 	bannerDate,
 	lang,
 	setOGTypeArticle,
@@ -74,7 +81,7 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
 </header>
 
 <!-- Banner -->
-<BannerStage page={page} title={title} description={description} date={bannerDate} />
+<BannerStage page={page} title={title} description={hideBannerSubtitle ? "" : description} date={bannerDate} />
 
 <!-- Main content -->
 <div id="main-layout" class="absolute w-full z-30 pointer-events-none">
@@ -96,7 +103,7 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
                     data-current-page={page}
                     data-has-comments={hasComments ? "true" : "false"}
                     data-banner-title={title || ""}
-                    data-banner-description={description || ""}
+                    data-banner-description={hideBannerSubtitle ? "" : description || ""}
                     data-banner-date={bannerDate || ""}
                     class="transition-swup-fade"
                 >

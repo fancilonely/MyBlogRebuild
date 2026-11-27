@@ -52,6 +52,7 @@ export const zh_CN: Translation = {
 	[Key.skills]: "技能",
 	[Key.skillsBanner]: "用来把想法落地为可维护产品的技术与工具。",
 	[Key.skillsCounts]: "项技能",
+	[Key.skillsNoResults]: "没有符合条件的技能",
 	[Key.skillCategories]: "技能分类",
 	[Key.skillLevel]: "熟练度",
 	[Key.skillLevelBeginner]: "入门",

@@ -56,6 +56,7 @@ export const ko: Translation = {
 	[Key.skillsBanner]:
 		"아이디어를 유지보수 가능한 제품으로 만드는 기술과 도구입니다.",
 	[Key.skillsCounts]: "개 기술",
+	[Key.skillsNoResults]: "조건에 맞는 기술이 없습니다",
 	[Key.skillCategories]: "기술 카테고리",
 	[Key.skillLevel]: "숙련도",
 	[Key.skillLevelBeginner]: "초급",

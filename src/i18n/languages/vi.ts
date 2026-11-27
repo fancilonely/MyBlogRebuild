@@ -57,6 +57,7 @@ export const vi: Translation = {
 	[Key.skillsBanner]:
 		"Công nghệ và công cụ để biến ý tưởng thành sản phẩm dễ bảo trì.",
 	[Key.skillsCounts]: "kỹ năng",
+	[Key.skillsNoResults]: "Không có kỹ năng phù hợp",
 	[Key.skillCategories]: "Danh mục kỹ năng",
 	[Key.skillLevel]: "Mức độ thành thạo",
 	[Key.skillLevelBeginner]: "Mới bắt đầu",

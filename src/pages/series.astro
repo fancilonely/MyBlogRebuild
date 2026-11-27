@@ -67,12 +67,11 @@ const pageDescription = seriesConfig.description
 	: seriesSummary;
 ---
 
-<MainGridLayout title={pageTitle} description={pageDescription} page="series">
+<MainGridLayout title={pageTitle} description={pageDescription} hideBannerSubtitle page="series">
 	<Card color="var(--card-bg)" radius="l" class="series-index px-8 py-6">
 		<PageHeader
 			icon="material-symbols:auto-stories-rounded"
 			title={pageTitle}
-			subtitle={seriesSummary}
 		/>
 		{items.length > 0 && (
 			<div class="series-index__list">

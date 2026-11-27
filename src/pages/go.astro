@@ -1,0 +1,220 @@
+---
+/**
+ * 外链跳转缓冲页（`/go/?url=<encodeURIComponent(targetUrl)>`）。
+ *
+ * 替代老 WordPress 站的 `redirect.php`，纯静态实现：
+ * - 目标地址由客户端从 `?url=` 读取，仅接受 `http://` / `https://`（阻断 `javascript:` 注入）；
+ * - 完整展示目标地址并高亮域名，方便访客核对是否钓鱼；
+ * - 「继续前往」为原生 `<a>`（`data-no-redirect` 防止被全局外链拦截再次送回本页）；
+ * - 3 秒倒计时自动跳转，可随时取消；无效链接只保留「返回上一页」。
+ *
+ * 页面逻辑见 `src/utils/external-link-buffer.ts` 的 `initRedirectBufferPage()`，
+ * 由 `Layout.astro` 统一在初始加载与 Swup 换页后调用。
+ */
+import Card from "@components/atoms/display/Card.svelte";
+import PageHeader from "@components/atoms/display/PageHeader.astro";
+import Icon from "@iconify/svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { profileConfig } from "@/config";
+
+const siteName = profileConfig.name;
+const pageTitle = `即将离开 ${siteName}，前往外部网站`;
+---
+
+<MainGridLayout
+	title="外链跳转确认"
+	description={`${pageTitle}前的安全确认页：核对目标域名后再继续。`}
+>
+	<meta slot="head" name="robots" content="noindex, nofollow" />
+
+	<Card
+		id="go-page"
+		color="var(--card-bg)"
+		radius="l"
+		class="go-card px-6 py-8 md:px-10 md:py-12"
+	>
+		<div class="go-card__inner" data-pagefind-ignore>
+			<div class="go-card__badge" aria-hidden="true">
+				<Icon icon="material-symbols:open-in-new-rounded" />
+			</div>
+
+			<PageHeader
+				title={pageTitle}
+				subtitle="外链不会直接放行：请先核对下方目标域名与路径，确认无误后再继续。"
+				class="go-card__header"
+			/>
+
+			<section class="go-target" aria-label="目标地址">
+				<span class="go-target__label">目标地址</span>
+				<p class="go-target__url" id="go-target-url">
+					<span class="go-target__scheme" id="go-target-scheme"></span><span
+						class="go-target__host"
+						id="go-target-host"></span><span
+						class="go-target__rest"
+						id="go-target-rest"></span>
+				</p>
+			</section>
+
+			<p class="go-alert" id="go-error" role="alert" hidden></p>
+			<p class="go-countdown" id="go-countdown" aria-live="polite" hidden></p>
+
+			<div class="go-actions">
+				<a
+					id="go-continue"
+					class="go-button go-button--filled m3-state-layer"
+					data-no-redirect
+					rel="noopener noreferrer"
+					hidden
+				>
+					<Icon icon="material-symbols:open-in-new-rounded" />
+					<span>继续前往</span>
+				</a>
+				<button
+					id="go-back"
+					type="button"
+					class="go-button go-button--tonal m3-state-layer"
+				>
+					<Icon icon="material-symbols:arrow-back-rounded" />
+					<span>返回上一页</span>
+				</button>
+				<button
+					id="go-cancel"
+					type="button"
+					class="go-button go-button--text m3-state-layer"
+					hidden
+				>
+					<Icon icon="material-symbols:close-rounded" />
+					<span>取消自动跳转</span>
+				</button>
+			</div>
+
+			<p class="go-hint" id="go-hint">
+				本页为外链安全缓冲，不会记录你的跳转信息。
+			</p>
+
+			<noscript>
+				<p class="go-alert" role="alert">
+					当前浏览器禁用了 JavaScript，无法解析目标地址。请手动复制链接地址访问。
+				</p>
+			</noscript>
+		</div>
+	</Card>
+</MainGridLayout>
+
+<style lang="stylus">
+.go-card
+	position: relative
+	min-height: clamp(20rem, 46vh, 32rem)
+
+.go-card__inner
+	display: flex
+	flex-direction: column
+	gap: 1.25rem
+	max-width: 44rem
+	margin: 0 auto
+
+.go-card__badge
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	width: 3.5rem
+	height: 3.5rem
+	border-radius: var(--shape-corner-full)
+	background: var(--surface-container-high)
+	border: 1px solid var(--outline-variant)
+	box-shadow: var(--m3e-elevation-1)
+
+	> :global(svg)
+		width: 1.75rem
+		height: 1.75rem
+		color: var(--primary)
+
+.go-card__header
+	margin-bottom: 0
+
+/* 目标地址展示：域名高亮，其余路径弱化 */
+.go-target
+	display: flex
+	flex-direction: column
+	gap: 0.375rem
+	padding: 0.875rem 1rem
+	border-radius: var(--shape-corner-m)
+	background: var(--surface-container-high)
+	border: 1px solid var(--outline-variant)
+
+.go-target__label
+	color: var(--on-surface-variant)
+	font: var(--m3e-type-label-medium)
+
+.go-target__url
+	margin: 0
+	line-height: 1.5
+	word-break: break-all
+	color: var(--on-surface-variant)
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+	font-size: 0.875rem
+
+.go-target__host
+	color: var(--primary)
+	font-weight: 700
+
+.go-alert
+	margin: 0
+	padding: 0.75rem 1rem
+	border-radius: var(--shape-corner-m)
+	background: var(--error-container)
+	color: var(--on-error-container)
+	font: var(--m3e-type-body-medium)
+
+.go-countdown
+	margin: 0
+	color: var(--on-surface-variant)
+	font: var(--m3e-type-body-small)
+
+.go-actions
+	display: flex
+	flex-wrap: wrap
+	align-items: center
+	gap: 0.75rem
+
+.go-button
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	gap: 0.5rem
+	height: 2.5rem
+	padding: 0 1.5rem
+	border: none
+	border-radius: var(--shape-corner-m)
+	background: transparent
+	color: var(--primary)
+	font: var(--m3e-type-label-large)
+	text-decoration: none
+	white-space: nowrap
+	cursor: pointer
+
+	> :global(svg)
+		width: 1.25rem
+		height: 1.25rem
+
+	&[hidden]
+		display: none
+
+.go-button--filled
+	background: var(--primary)
+	color: var(--on-primary)
+	--m3e-state-color: var(--on-primary)
+
+.go-button--tonal
+	background: var(--secondary-container)
+	color: var(--on-secondary-container)
+	--m3e-state-color: var(--on-secondary-container)
+
+.go-button--text
+	--m3e-state-color: var(--primary)
+
+.go-hint
+	margin: 0
+	color: var(--on-surface-variant)
+	font: var(--m3e-type-body-small)
+</style>

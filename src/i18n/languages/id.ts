@@ -57,6 +57,7 @@ export const id: Translation = {
 	[Key.skillsBanner]:
 		"Teknologi dan alat untuk mengubah ide menjadi produk yang mudah dipelihara.",
 	[Key.skillsCounts]: "keahlian",
+	[Key.skillsNoResults]: "Tidak ada keahlian yang cocok",
 	[Key.skillCategories]: "Kategori keahlian",
 	[Key.skillLevel]: "Kemahiran",
 	[Key.skillLevelBeginner]: "Pemula",
